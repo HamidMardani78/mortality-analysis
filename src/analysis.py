@@ -1,5 +1,6 @@
 """Functions to compute statistics on the SUPPORT2 dataset."""
 
+import numpy as np
 import pandas as pd
 from scipy import stats
 
@@ -49,3 +50,31 @@ def chi_square_test(df, group_col):
     table = pd.crosstab(df[group_col], df["hospdead"])
     chi2, p_value, dof, expected = stats.chi2_contingency(table)
     return p_value
+
+
+def compare_survived_died(df, columns):
+    """Compare numeric columns between patients who survived and who died.
+
+    Args:
+        df (pandas.DataFrame): the cleaned dataset.
+        columns (list): names of the numeric columns to compare.
+
+    Returns:
+        pandas.DataFrame: mean, median and standard deviation of each
+            column for the two groups of patients.
+    """
+    rows = []
+    for col in columns:
+        survived = df.loc[df["hospdead"] == 0, col].dropna().to_numpy()
+        died = df.loc[df["hospdead"] == 1, col].dropna().to_numpy()
+        rows.append({
+            "variable": col,
+            "mean_survived": np.mean(survived),
+            "mean_died": np.mean(died),
+            "median_survived": np.median(survived),
+            "median_died": np.median(died),
+            "std_survived": np.std(survived),
+            "std_died": np.std(died),
+        })
+    return pd.DataFrame(rows).set_index("variable").round(2)
+
