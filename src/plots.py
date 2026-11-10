@@ -25,3 +25,28 @@ def plot_mortality_by_group(table, title, filename=None):
     if filename is not None:
         fig.savefig(filename, dpi=150)
     plt.show()
+    
+    
+def plot_survived_vs_died(df, column, label, filename=None):
+    """Draw two boxplots to compare a numeric column between the two groups.
+
+    Args:
+        df (pandas.DataFrame): the cleaned dataset.
+        column (str): name of the numeric column to compare.
+        label (str): description of the column, used for the axis.
+        filename (str): if given, the chart is also saved to this file.
+    """
+    survived = df.loc[df["hospdead"] == 0, column].dropna()
+    died = df.loc[df["hospdead"] == 1, column].dropna()
+
+    fig, ax = plt.subplots(figsize=(6, 5))
+    ax.boxplot([survived, died], tick_labels=["Survived", "Died"])
+    ax.set_ylabel(label)
+    ax.set_title(f"{label}: survived vs died")
+
+    plt.tight_layout()
+    if filename is not None:
+        fig.savefig(filename, dpi=150)
+    plt.show()
+    
+       
