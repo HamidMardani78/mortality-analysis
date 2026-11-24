@@ -5,8 +5,8 @@ import streamlit as st
 
 from src.data_loader import load_data
 from src.cleaning import clean_data
-from src.analysis import add_age_group, mortality_by_group, chi_square_test
-from src.plots import plot_mortality_by_group
+from src.analysis import add_age_group, mortality_by_group, chi_square_test, compare_survived_died
+from src.plots import plot_mortality_by_group, plot_survived_vs_died
 
 st.set_page_config(page_title="In-Hospital Mortality", layout="wide")
 
@@ -74,7 +74,44 @@ with tab1:
             st.write(f"Chi-square test: p-value = {p:.4f} (not significant)")
 
 with tab2:
-    st.info("Coming next.")
+    numeric_options = {
+        "Severity score (APS)": "aps",
+        "Coma score": "scoma",
+        "Heart rate (beats/min)": "hrt",
+        "Mean blood pressure (mmHg)": "meanbp",
+        "Respiratory rate (breaths/min)": "resp",
+        "Age (years)": "age",
+    }
+    label = st.selectbox("Variable", list(numeric_options.keys()))
+    column = numeric_options[label]
+
+    left, right = st.columns([2, 3])
+
+    with left:
+        fig = plot_survived_vs_died(df, column, label)
+        st.pyplot(fig)
+        plt.close(fig)
+
+    with right:
+        st.write("Mean, median and standard deviation for all variables:")
+        st.dataframe(compare_survived_died(df, list(numeric_options.values())))
 
 with tab3:
-    st.info("Coming next.")
+    diseases = st.multiselect(
+        "Filter by disease group",
+        sorted(df["dzgroup"].unique()),
+    )
+    if diseases:
+        shown = df[df["dzgroup"].isin(diseases)]
+    else:
+        shown = df
+
+    st.write(f"{len(shown)} patients")
+    st.dataframe(shown)
+
+    st.download_button(
+        "Download the cleaned data (CSV)",
+        shown.to_csv().encode("utf-8"),
+        "support2_clean.csv",
+        "text/csv",
+    )
