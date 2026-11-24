@@ -37,6 +37,7 @@ mortality-analysis/
 │   └── plots.py              # charts (matplotlib)
 ├── 01_exploration.ipynb      # first exploration of the data
 ├── 02_presentation.ipynb     # final presentation of the results
+├── app.py                    # Streamlit dashboard
 ├── requirements.txt
 └── README.md
 ```
@@ -64,13 +65,21 @@ pip install -r requirements.txt
 
 ## Usage
 
-Open the presentation notebook from the project folder:
+Run the interactive dashboard from the project folder:
+
+```bash
+streamlit run app.py
+```
+
+The app opens in the browser at http://localhost:8501. It has three tabs:
+mortality by group (with a chi-square test), survived vs died (boxplots and
+summary statistics), and the cleaned data (with a filter and a CSV download).
+
+The same analysis is also available as a notebook:
 
 ```bash
 jupyter notebook 02_presentation.ipynb
 ```
-
-and run all the cells.
 
 ## Main findings
 
@@ -82,7 +91,7 @@ and run all the cells.
 
 ## Libraries
 
-pandas, numpy, scipy, matplotlib, jupyter (see `requirements.txt` for versions).
+pandas, numpy, scipy, matplotlib, jupyter, streamlit (see `requirements.txt` for versions).
 
 ## Author
 
