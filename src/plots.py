@@ -24,7 +24,8 @@ def plot_mortality_by_group(table, title, filename=None):
     plt.tight_layout()
     if filename is not None:
         fig.savefig(filename, dpi=150)
-    plt.show()
+    
+    return fig
     
     
 def plot_survived_vs_died(df, column, label, filename=None):
@@ -47,6 +48,7 @@ def plot_survived_vs_died(df, column, label, filename=None):
     plt.tight_layout()
     if filename is not None:
         fig.savefig(filename, dpi=150)
-    plt.show()
+    
+    return fig
     
        
