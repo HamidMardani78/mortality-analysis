@@ -4,6 +4,7 @@ import numpy as np
 import pandas as pd
 from scipy import stats
 
+
 def mortality_by_group(df, group_col):
     """Compute the in-hospital mortality rate for each group of patients.
 
@@ -77,4 +78,3 @@ def compare_survived_died(df, columns):
             "std_died": np.std(died),
         })
     return pd.DataFrame(rows).set_index("variable").round(2)
-

@@ -14,7 +14,8 @@ def plot_mortality_by_group(table, title, filename=None):
         matplotlib.figure.Figure: the figure with the chart.
     """
     fig, ax = plt.subplots(figsize=(8, 4))
-    ax.barh(table.index.astype(str), table["mortality_rate"], color="steelblue")
+    ax.barh(table.index.astype(str),
+            table["mortality_rate"], color="steelblue")
     ax.invert_yaxis()
     ax.set_xlim(0, table["mortality_rate"].max() + 8)
     ax.set_xlabel("In-hospital mortality (%)")
@@ -26,10 +27,10 @@ def plot_mortality_by_group(table, title, filename=None):
     plt.tight_layout()
     if filename is not None:
         fig.savefig(filename, dpi=150)
-    
+
     return fig
-    
-    
+
+
 def plot_survived_vs_died(df, column, label, filename=None):
     """Draw two boxplots to compare a numeric column between the two groups.
 
@@ -52,7 +53,5 @@ def plot_survived_vs_died(df, column, label, filename=None):
     plt.tight_layout()
     if filename is not None:
         fig.savefig(filename, dpi=150)
-    
+
     return fig
-    
-       

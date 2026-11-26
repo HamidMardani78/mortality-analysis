@@ -59,7 +59,8 @@ with tab1:
     left, right = st.columns([3, 2])
 
     with left:
-        fig = plot_mortality_by_group(table, f"In-hospital mortality by {choice.lower()}")
+        fig = plot_mortality_by_group(
+            table, f"In-hospital mortality by {choice.lower()}")
         st.pyplot(fig)
         plt.close(fig)
 
