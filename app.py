@@ -36,8 +36,11 @@ st.markdown(
     "in 5 US hospitals (1989-1994)."
 )
 
-df = get_data()
-
+try:
+    df = get_data()
+except (FileNotFoundError, ValueError) as err:
+    st.error(str(err))
+    st.stop()
 col1, col2, col3 = st.columns(3)
 col1.metric("Patients", len(df))
 col2.metric("Died in hospital", int(df["hospdead"].sum()))
