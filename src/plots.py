@@ -9,7 +9,9 @@ def plot_mortality_by_group(table, title, filename=None):
     Args:
         table (pandas.DataFrame): output of the function mortality_by_group.
         title (str): title of the chart.
-        filename (str): if given, the chart is also saved to this file.
+        filename (str): if given, the chart is also saved to this file.     
+    Returns:
+        matplotlib.figure.Figure: the figure with the chart.
     """
     fig, ax = plt.subplots(figsize=(8, 4))
     ax.barh(table.index.astype(str), table["mortality_rate"], color="steelblue")
@@ -36,6 +38,8 @@ def plot_survived_vs_died(df, column, label, filename=None):
         column (str): name of the numeric column to compare.
         label (str): description of the column, used for the axis.
         filename (str): if given, the chart is also saved to this file.
+    Returns:
+        matplotlib.figure.Figure: the figure with the chart.
     """
     survived = df.loc[df["hospdead"] == 0, column].dropna()
     died = df.loc[df["hospdead"] == 1, column].dropna()
