@@ -10,7 +10,7 @@ def plot_mortality_by_group(table, title, filename=None):
         table (pandas.DataFrame): output of the function mortality_by_group.
         title (str): title of the chart.
         filename (str): if given, the chart is also saved to this file.
-         
+
     Returns:
         matplotlib.figure.Figure: the figure with the chart.
     """
@@ -40,7 +40,7 @@ def plot_survived_vs_died(df, column, label, filename=None):
         column (str): name of the numeric column to compare.
         label (str): description of the column, used for the axis.
         filename (str): if given, the chart is also saved to this file.
-        
+
     Returns:
         matplotlib.figure.Figure: the figure with the chart.
     """
