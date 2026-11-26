@@ -23,6 +23,12 @@ are associated with dying in hospital?
 
 The CSV file is included in the `data/` folder (about 3 MB).
 
+## Data cleaning
+
+- Columns with more than 50% missing values are dropped (`adlp`, `urine`).
+- Zeros in heart rate, respiratory rate and blood pressure are impossible for a living patient, so they are replaced with missing values.
+- Missing income is kept as a separate `unknown` category, because these patients died more often.
+
 ## Project structure
 
 ```
@@ -86,7 +92,7 @@ jupyter notebook 02_presentation.ipynb
 - Coma (60.7%) and multiple organ failure (52.7%) are the most lethal conditions.
 - Mortality increases with age after 50 (from 22.7% to 31.2% for patients over 80).
 - The APACHE III severity score clearly separates survivors from non-survivors.
-- Sex and income are not associated with mortality.
+- Sex is not associated with mortality (p = 0.27); income only through the patients with unknown income, who died more often (30% vs 24%).
 - Patients with metastatic cancer have low in-hospital mortality but very high mortality after discharge.
 
 ## Libraries
