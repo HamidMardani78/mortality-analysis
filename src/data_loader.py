@@ -16,9 +16,9 @@ def load_data(path="data/support2.csv"):
     """
     if not os.path.exists(path):
         raise FileNotFoundError(
-            f"File {path} not found. Download it from https://hbiostat.org/data/"
+            f"File {path} not found. "
+            "Download it from https://hbiostat.org/data/"
         )
-
     df = pd.read_csv(path, index_col=0)
     print(f"Loaded {df.shape[0]} patients and {df.shape[1]} columns")
     return df

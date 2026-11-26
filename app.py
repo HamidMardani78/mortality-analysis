@@ -5,7 +5,12 @@ import streamlit as st
 
 from src.data_loader import load_data
 from src.cleaning import clean_data
-from src.analysis import add_age_group, mortality_by_group, chi_square_test, compare_survived_died
+from src.analysis import (
+    add_age_group,
+    mortality_by_group,
+    chi_square_test,
+    compare_survived_died,
+)
 from src.plots import plot_mortality_by_group, plot_survived_vs_died
 
 st.set_page_config(page_title="In-Hospital Mortality", layout="wide")
